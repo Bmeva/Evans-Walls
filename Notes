@@ -1,0 +1,38 @@
+after isntalling django i migrated with python manage.py migrate to create the default db tables
+then i created super user
+
+eva Nedva@54
+
+i went to the dirs in the setttings and addded templates to cofigure my templates
+
+If you go to getbootstrap.com then click on examples and download examples you can use multiple components
+
+CONFIGURE STATIC
+go to settings.py
+
+STATIC_ROOT = BASE_DIR /'static'
+STATICFILES_DIRS = [
+'Evans_Walls/static',
+]
+
+then create a static folder in the project directory which is Evans_Walls
+
+SETTING UP GIT IGNORE FILES
+go to gitignore.oo inside the searcbar type django
+it would create files and folders for git to ignore while pushing to git repo
+copy the generated codes and create a file in the root drectory and call it.gitignore
+
+
+SETTING UP MEDIA FILES
+go to settings.py and add 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'media'
+
+go to the root folder and create the media folder
+go to the urls. py and import these two
+
+from django.conf.urls.static import static
+from django.conf import settings
+
+then concatenate this at the last square bracket 
++ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
