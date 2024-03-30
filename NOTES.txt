@@ -36,3 +36,14 @@ from django.conf import settings
 
 then concatenate this at the last square bracket 
 + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+before you use 404 error page change debug =False on the settings.py
+also in the allowed host add * which means it should allow every host
+
+DISPLAYING CATEGORIES ON TOP OF EVERY PAGE
+
+i created a context_processor.py file in my blog app and wrote the code
+then i went to settings.py and added the below code in the templates section
+
+'blogs.context_processors.get_categories'
+

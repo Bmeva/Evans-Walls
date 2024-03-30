@@ -26,12 +26,13 @@
 
   <!--display only post coming in the first loop-->
 
-  <h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">Featured Posts</h3>
+  <h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">Category - {{thecategory}}</h3>
 
 
   <div class="row mb-2">
-    {% for post in featured_post %}
-      {% if not forloop.first %}
+    {% if thepost %}
+    {% for post in thepost %}
+         
     <div class="col-md-6">
       <div class="card border-0" >
           <div class="card-body">
@@ -49,54 +50,23 @@
         </div>
       </div>
     </div>
-    {% endif %}
+  
     {% endfor %}
+    {% else %}
+    <p>No post found </p>
+
+    {% endif %}
     
   </div>
 
-  <h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">Recent Articles</h3>
+  
 
-  <main role="main" class="container p-0">
-    <div class="row">
-      <div class="col-md-8 blog-main">
-        {% for thepost in post %}
-
-        <div class="card border-0" >
-          <div class="card-body">
-          <h3>{{thepost.title}}</h3>
-            <small class="mb-1 text-muted">{{thepost.created_at | timesince }} ago | {{thepost.author}}</small>
-          <p class="card-text">{{thepost.short_description | truncatewords:50}}</p>
-          {% if thepost.featured_image %}
-            <img src="{{ thepost.featured_image.url }}" class="img-thumbnail" alt="...">
-          {% else%}
-          <img src="{% static 'images/cricket.jpg' %}" class="img-thumbnail"  alt="...">
-
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-           
-
-
-    </div>
-    <!-- /.blog-main -->
-    
-
-
-
-    {% include 'includes/sidebar.html' %}
-
-    
-
-      
+  
 
     </div><!-- /.row -->
-    
-    
 
   </main><!-- /.container -->
 
 </div>
-
 
 {% endblock %}

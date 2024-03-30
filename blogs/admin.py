@@ -8,6 +8,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title', 'b_category')
     search_fields = ('id', 'title', 'author', 'b_category__category_name', 'status') #b_category__category_name is a foreign key that is why we used __ to point to the particular field
     list_editable = ('is_featured','status')
+    ordering = ['id']
     
 admin.site.register(Category)
 
