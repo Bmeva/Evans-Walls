@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import blog, Category
+from django.db.models import Q
 
 # Create your views here.
 
@@ -23,3 +24,49 @@ def post_by_category(request, category_id):
         #'categories': categories,
     }
     return render(request, 'blogs/post_by_category.html', context)
+
+
+
+def single_blog(request, id):
+
+    single_theblog = get_object_or_404(blog, pk=id, status = 'Published') 
+    data = {
+        'single_theblog': single_theblog,
+    }
+
+    return render(request, 'blogs/single_blog.html', data)
+
+
+def search(request):
+    
+    thesearchterm = request.GET.get('keyword')
+
+    theblog = blog.objects.filter(Q(title__icontains = thesearchterm) | Q(short_description__icontains=thesearchterm) | Q(blog_body__icontains=thesearchterm), status='Published')
+    context = {
+        'theblog': theblog,
+        'thesearchterm': thesearchterm,
+    }
+    
+    return render(request, 'blogs/search.html', context)
+
+
+
+
+
+def search23(request):
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        # Make sure keyword is not empty
+        if keyword:
+            theblog = blog.objects.filter(title__icontains=keyword)
+        else:
+            theblog = blog.objects.none()
+    else:
+        theblog = blog.objects.none()
+
+    context = {
+        'theblog': theblog,
+        'keyword': keyword  # Pass the keyword back to the template for display
+    }
+
+    return render(request, 'blogs/search.html', context)

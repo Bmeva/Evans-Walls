@@ -36,3 +36,29 @@ class blog(models.Model):
     
     def __str__(self):
         return self.title
+    
+
+class About(models.Model):
+    about_heading = models.CharField(max_length = 25)
+    about_descrip = models.TextField(max_length = 225)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    class Meta:
+        verbose_name_plural = 'About'
+
+    def __str__(self):
+        return self.about_heading
+        
+class SocialLink(models.Model):
+    platform = models.CharField(max_length =25)
+    links = models.URLField(max_length = 100)
+    created_at = models.DateTimeField(auto_now_add= True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.platform
+    
+    #if you want the updated_at field to automatically update whenever the object is saved, 
+    #you should use auto_now=True. auto_now_add is typically used for fields that should be set 
+    #to the current date and time when the object is first created and not updated thereafter
