@@ -47,3 +47,5 @@ then i went to settings.py and added the below code in the templates section
 
 'blogs.context_processors.get_categories'
 
+
+

@@ -1,0 +1,104 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- Page content-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{myabout.about_heading}}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2"></div>
+                    <!-- Post category-->
+                    <a class="badge bg-warning text-decoration-none text-light" href="#!"> </a>
+                </header>
+                <!-- Preview image figure-->
+               
+                <figure class="mb-4"><img class="img-fluid rounded" src="{% static 'images/cover.jpg' %}" alt="..." /></figure>
+                
+                <!-- Post content-->
+                <section class="mb-5">
+                    <p class="fs-5 mb-4 badge bg-warning" ></p>
+                    <p class="fs-5 mb-4 text-justify">{{myabout.about_descrip}}</p>
+
+                   
+                    </section>
+            </article>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+           
+            <!-- Search widget-->
+            <div class="card mb-4">
+                <div class="card-header">Search</div>
+                <div class="card-body">
+
+                    <form action="{% url 'search' %}" method="GET">
+                        {% csrf_token %}
+                        <div class="input-group">
+                          <input class="form-control" type="text" name="keyword" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                          <button type="submit" class="btn btn-warning" id="button-search">Go!</button>
+                        </div>
+
+                </div>
+            </div>
+
+
+            <!-- Categories widget-->
+            <div class="card mb-4 p-3">
+                <h4 class="font-italic">Categories</h4>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                {% for cat in categories %} <!-- calling from the context processor-->
+                                <li><a href="{% url 'post_by_category' cat.id %}">{{cat.category_name}}</a></li>
+                                {% endfor %}
+                                
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-12">
+                <div class="position-sticky" style="top: 2rem;">
+                  <div class="p-8 mb-3 bg-body-tertiary rounded">
+                    {% for i in theabout %} <!--calling from context processor-->
+                    <h4 class="fst-italic"><a href="{% url 'about' %}" class="text-danger"> {{i.about_heading }}</a></h4>
+                    <p class="mb-0 text-justify">{{ i.about_descrip | truncatewords:50 }}...</p>
+                    {% endfor %}
+                  </div>
+
+
+
+            {% if social_links %}
+            <!-- Side widget-->
+            <div class="card mb-4 p-3">
+                <h4 class="font-italic">Follow Us</h4>
+                <ol class="list-unstyled">
+                    {% for i in social_links %}
+                    <li><a href="{{i.link}}" target="_blank">{{i.platform}}|{{i.created_at}}</a></li>
+                    {% endfor %}
+                    
+                </ol>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% include 'includes/footerForm.html' %}
+
+
+{% endblock %}

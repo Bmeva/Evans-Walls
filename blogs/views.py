@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import blog, Category
+from .models import blog, Category, About
 from django.db.models import Q
 
 # Create your views here.
@@ -37,6 +37,8 @@ def single_blog(request, id):
     return render(request, 'blogs/single_blog.html', data)
 
 
+
+
 def search(request):
     
     thesearchterm = request.GET.get('keyword')
@@ -70,3 +72,17 @@ def search23(request):
     }
 
     return render(request, 'blogs/search.html', context)
+
+
+
+
+def about(request):
+
+    myabout = get_object_or_404(About) 
+    
+    data = {
+        'myabout': myabout,
+    }
+
+
+    return render(request, 'blogs/about.html', data)

@@ -21,7 +21,7 @@
                     <a class="badge bg-warning text-decoration-none text-light" href="#!">{{single_theblog.b_category}}</a>
                 </header>
                 <!-- Preview image figure-->
-                {% if post.featured_image %}
+                {% if single_theblog.featured_image %}
                 <figure class="mb-4"><img class="img-fluid rounded" src="{{single_theblog.featured_image.url}}" alt="..." /></figure>
                 {% else%}
                 <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
@@ -29,7 +29,9 @@
                 <!-- Post content-->
                 <section class="mb-5">
                     <p class="fs-5 mb-4 badge bg-warning" >{{single_theblog.short_description}}</p>
-                    <p class="fs-5 mb-4">{{single_theblog.blog_body}}</p>
+                    <p class="fs-5 mb-4 text-justify">{{single_theblog.blog_body}}</p>
+
+                   
                     </section>
             </article>
         </div>
@@ -69,6 +71,17 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-12">
+                <div class="position-sticky" style="top: 2rem;">
+                  <div class="p-8 mb-3 bg-body-tertiary rounded">
+                    {% for i in theabout %}
+                    <h4 class="fst-italic"><a href="{% url 'about' %}" class="text-danger"> {{i.about_heading }}</a></h4>
+                    <p class="mb-0 text-justify">{{ i.about_descrip | truncatewords:50 }}...</p>
+                    {% endfor %}
+                  </div>
+
+
 
             {% if social_links %}
             <!-- Side widget-->

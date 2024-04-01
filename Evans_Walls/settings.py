@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'blogs',
+    'authentication',
+
+  
 ]
 
 MIDDLEWARE = [
@@ -68,6 +74,9 @@ TEMPLATES = [
                 #User defined context processor
                 'blogs.context_processors.get_categories',
                 'blogs.context_processors.get_social_links',
+                'blogs.context_processors.get_about',
+
+                
 
 
                 
@@ -137,3 +146,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
+
+
+
+
+
+
