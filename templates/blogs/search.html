@@ -8,35 +8,83 @@
 <h3 class="text-warning" style="letter-spacing: 2px;">Search Term - {{thesearchterm}}</h3>
 
 
-<div class="row mb-2">
-  {% if theblog %}
-  {% for post in theblog %}
-       
-  <div class="col-md-6">
-    <div class="card border-0" >
-        <div class="card-body">
-       <a href="{% url 'single_blog' post.id %}"><h3><a href="{% url 'single_blog' post.id %}" class="text-dark">{{post.title}}</a></h3>
-        {% if post.featured_image %}
-          <img src="{{ post.featured_image.url }}" class="img-fluid" style="width: 600px; height: 300px;" alt="...">
-        {% else%}
-        <img src="{% static 'images/cricket.jpg' %}" class="img-fluid" style="width: 600px; height: 300px;" alt="...">
+<div class="row mb-2" id="postResults">
+ 
+       {% if theblog %}
+     
+              {% for post in theblog %}
+            
+                  <div class="col-md-6">
+                    <div class="card border-0" >
+                        <div class="card-body">
+                            <a href="{% url 'single_blog' post.id %}"><h3><a href="{% url 'single_blog' post.id %}" class="text-dark">{{post.title}}</a></h3>
+                                  {% if post.featured_image %}
+                                    <img src="{{ post.featured_image.url }}" class="img-fluid" style="width: 600px; height: 300px;" alt="...">
+                                  {% else%}
+                                  <img src="{% static 'images/cricket.jpg' %}" class="img-fluid" style="width: 600px; height: 300px;" alt="...">
 
-        {% endif %}
-        <small class="mb-1 text-muted">{{post.created_at | timesince }} ago | {{post.author}}</small>
-        <p class="card-text">{{post.short_description | truncatewords:30 }}</p>
-        <!--you can also use which would display 30 characters | truncatechars:30-->
-       
-      </div>
-    </div>
-  </div>
+                                  {% endif %}
+                                <small class="mb-1 text-muted">{{post.created_at | timesince }} ago | {{post.author}}</small>
+                                <p class="card-text">{{post.short_description | truncatewords:30 }}</p>
+                        <!--you can also use which would display 30 characters | truncatechars:30-->
+                        
+                        </div>
+                    </div>
+                  </div>
 
-  {% endfor %}
-  {% else %}
-  <p>No post found </p>
+              {% endfor %}
+        {% else %}
+      <p id="noPostFound">No post found </p>
 
   {% endif %}
   
 </div>
 
+<div class="row mb-2" id="categoryResults">
+  {% if thecategory %}
+          <h2>Category Results</h2>
+              {% for category in thecategory %}
+                <div class="col-md-6">
+                  <div class="card border-0">
+                    <div class="card-body">
+                      <h2>Category Description: {{ category.category_decription }}</h2>
+                      <p>Category name: {{ category.category_name }}</p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+          {% else %}
+    <p id="noCategoryFound">No category found</p>
+  {% endif %}
+</div>
+
+
+<!-- JavaScript to hide/show no results messages -->
+
+
+<!-- JavaScript to hide/show no results messages -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var postResults = document.getElementById("postResults");
+    var categoryResults = document.getElementById("categoryResults");
+    var noPostFound = document.getElementById("noPostFound");
+    var noCategoryFound = document.getElementById("noCategoryFound");
+  
+    if (postResults && categoryResults) {
+      if (postResults.children.length > 0 || categoryResults.children.length > 0) {
+        // Hide "Nothing found" message if either blog or category results are found
+        noPostFound.style.display = "none";
+        noCategoryFound.style.display = "none";
+      } else {
+        // Show "Nothing found" message if both blog and category results are empty
+
+        noPostFound.textContent = "No blog post found";
+        noPostFound.style.display = "block";
+        noCategoryFound.style.display = "block";
+      }
+    }
+  });
+</script>
+  
 
 {% endblock %}

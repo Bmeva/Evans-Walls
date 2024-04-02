@@ -1,6 +1,8 @@
 after isntalling django i migrated with python manage.py migrate to create the default db tables
 then i created super user
 
+
+04075
 eva Nedva@54
 
 i went to the dirs in the setttings and addded templates to cofigure my templates
@@ -47,5 +49,30 @@ then i went to settings.py and added the below code in the templates section
 
 'blogs.context_processors.get_categories'
 
+
+pip freeze > requirements.txt
+
+pip install -r requirements.txt
+
+
+pip install --upgrade (package name )  which means pip install django django to upgrade packages
+
+to upgrade everything in requirements.txt open the file and press ctr f
+then click the arrow button so replace would show
+tyoe == and replace with >= so it would replace ==
+
+then run 
+pip install -r requirements.txt --upgrade
+
+when finished go back and replace >= with the ==
+
+run pip freeze > requirements.txt to save the new packages
+
+
+python -m django --version to check django version
+
+
+i addded font awesome font awesomecnd to the base.html so i can use the icons in my 
+dashcategories.html
 
 

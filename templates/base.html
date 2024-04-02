@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
     <link href="{% static 'css/footer.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 <body>
     <div class="container">
@@ -42,7 +43,8 @@
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'about' %}">About</a>
             {% else %}
 
-            <span class="btn btn-sm btn-warning"> You are logged in as {{ user }}</span> &nbsp;
+            <span class="btn btn-sm btn-warning"> Hi {{ user }}!</span> &nbsp;
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'dashboards' %}">Dashboard</a>&nbsp;
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}">Logout</a>&nbsp;
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'about' %}">About</a>
 

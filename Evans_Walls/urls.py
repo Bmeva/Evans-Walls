@@ -31,6 +31,6 @@ urlpatterns = [
 
     #path('', include('authentication.urls')), if i leave this path empty then it would go to authentication.urls and find the urls
 
-    
+     path('CMS/dashboard/', include('Dashboards.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

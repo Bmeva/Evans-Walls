@@ -1,0 +1,10 @@
+    <!--left side bar-->
+    <div class="col-md-3">
+        <div class="nav flex-column nav-pills bg-light" aria-orientation="vertical"> 
+            <a href="{% url 'dashboards' %}" class="nav-link text-dark {% if '/CMS/dashboard/' == request.path %} bg-warning{% endif %}">Dashboard</a>
+            <a href="{% url 'dashcategories' %}" class="nav-link text-dark {% if 'dashcategories' in request.path %} bg-warning{% endif %}">Categories</a>
+            <a href="{% url 'post' %}" class="nav-link text-dark {% if 'post' in request.path %} bg-warning{% endif %}">Posts</a>
+            <a href="" class="nav-link text-dark">Logout</a>
+
+        </div>
+    </div>

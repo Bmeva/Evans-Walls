@@ -43,10 +43,20 @@ def search(request):
     
     thesearchterm = request.GET.get('keyword')
 
-    theblog = blog.objects.filter(Q(title__icontains = thesearchterm) | Q(short_description__icontains=thesearchterm) | Q(blog_body__icontains=thesearchterm), status='Published')
+    theblog = blog.objects.filter(Q(title__icontains = thesearchterm) | 
+                                  Q(short_description__icontains=thesearchterm) | 
+                                  Q(blog_body__icontains=thesearchterm), status='Published')
+    
+    
+    thecategory = Category.objects.filter(Q(category_name__icontains = thesearchterm) | 
+                                  Q(category_decription__icontains=thesearchterm) ) 
+                                  
+    
+  
     context = {
         'theblog': theblog,
         'thesearchterm': thesearchterm,
+        'thecategory': thecategory,
     }
     
     return render(request, 'blogs/search.html', context)

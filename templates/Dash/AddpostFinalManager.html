@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row"> 
+
+    {% include 'Dash/dashsidebar.html' %}
+    
+    <div class="col-md-9">
+        <h2>Final manager Add new Post</h2>
+
+       <form action="{% url 'AddpostFinalManager' %}" method="POST" enctype="multipart/form-data"> <!-- added multipart/form-data bcos we would be uploading image-->
+
+        
+        {% csrf_token %}
+
+        {{ form }}
+
+        <button type="submit" class="btn btn-warning btn-sg">Submit</button>
+       </form>
+       <br>
+        
+    
+    </div>
+
+
+</div>
+
+
+{% endblock %}

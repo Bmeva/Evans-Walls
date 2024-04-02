@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row"> 
+
+    {% include 'Dash/dashsidebar.html' %}
+    
+    <div class="col-md-9">
+        <h2>Edit Category</h2>
+
+       <form action="{% url 'editcategory' catego.id %}" method="POST">
+
+        
+        {% csrf_token %}
+
+        {{ form }}
+
+        <button type="submit" class="btn btn-warning btn-sg">Submit</button> &nbsp;
+
+        
+       </form>
+      
+                    
+       <br>
+       <form action="{% url 'deletecategory' catego.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="pk" value="{{ catego.id }}">
+        <button type="submit" class="btn btn-danger btn-lg">Delete Category</button>
+        </form>
+        
+    
+    </div>
+
+    
+
+
+</div>
+
+
+{% endblock %}

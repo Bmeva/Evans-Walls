@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row"> 
+
+        {% include 'Dash/dashsidebar.html' %}
+        
+        <div class="col-md-9">
+            <h2>All Categories</h2>
+            <a href="{% url 'Addpost' %}" class="btn btn-dark text-light float-right mb-2">ADD POST</a>
+
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    <th>Featured</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for post in thepost %} <!--coming from context processor-->
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{post.b_category}}</td>
+                    <td>{{post.Author}}</td>
+                    <td>{{ post.status }}</td>
+                    <td>{% if post.is_featured %}<i class="fa fa-check text-success"></i>{% else %}<i class="fa fa-times text-danger"></i>{% endif %}</td>
+                    <!--<td>{{ post.is_featured }}</td>-->
+                    
+                    <td>
+                        <a href="{% url 'editPost' post.id %}"><i class="fa fa-edit text-success"></i></a>&nbsp;
+                        <a href="{% url 'deleteost' post.id %}"><i class="fa fa-trash text-danger"></i></a>
+                    
+                    </td>
+                  </tr>
+                  {% endfor %}
+                 
+                </tbody>
+              </table>
+            
+        
+        </div>
+
+
+</div>
+
+
+{% endblock%}
