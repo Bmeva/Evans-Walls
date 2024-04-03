@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row"> 
+
+        {% include 'Dash/dashsidebar.html' %}
+        
+        <div class="col-md-9">
+          {% if perms.auth.view_user %} <!--Added this so only users with this permision can access this table. we restricted user from seen this on the sidebar through the dashsidebar but sometimes it is possible for them to know the link -->
+            <h2>All Users</h2>
+            <a href="{% url 'aaddusers' %}" class="btn btn-dark text-light float-right mb-2">Add new user</a>
+
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Full name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Active</th>
+                    <th>Staff</th>
+                    <th>Superuser</th>
+                    <th>Action</th>
+                    <!--these are the fiedls in the User model if you click the users table in the admin panel you can see the fields-->
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in theusers %} <!--coming from context processor-->
+                  <tr>
+                    <!--<td>{{ i.id }}</td>-->
+                    <td>{{ forloop.counter}}</td>
+                    <td>{{ i.first_name }}, {{ i.last_name }}</td>
+                    <td>{{i.username}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{% if i.is_active %}<i class="fa fa-check text-success"></i>{% else %} <i class="fa fa-times text-danger"></i>{% endif %}</td>
+                    <td>{% if i.is_staff %}<i class="fa fa-check text-success"></i>{% else %} <i class="fa fa-times text-danger"></i>{% endif %}</td>
+                    <td>{% if i.is_superuser %}<i class="fa fa-check text-success"></i>{% else %} <i class="fa fa-times text-danger"></i>{% endif %}</td>
+                  
+                    <td>
+                        <a href="{% url 'editusers' i.id %}"><i class="fa fa-edit text-success"></i></a>&nbsp;
+                       
+                        <a href="{% url 'deleteUser' i.id %}" onclick="return confirmDelete();"><i class="fa fa-trash text-danger"></i></a>
+                    
+                    </td>
+                  </tr>
+                  {% endfor %}
+                 
+                </tbody>
+              </table>
+
+              {% else %}
+              <h5>You do not have permision to view this page</h5>
+              {% endif %}
+            
+        
+        </div>
+
+
+</div>
+
+<script>
+  function confirmDelete() {
+    // Display a confirmation dialog
+    var result = confirm("Are you sure you want to delete this post?");
+
+    // If the user confirms, proceed with deletion
+    if (result) {
+      return true;
+    } else {
+      // If the user cancels, prevent the default action (deleting the post)
+      return false;
+    }
+  }
+</script>
+
+
+{% endblock%}

@@ -76,3 +76,4 @@ i addded font awesome font awesomecnd to the base.html so i can use the icons in
 dashcategories.html
 
 
+git log would show your previous commits

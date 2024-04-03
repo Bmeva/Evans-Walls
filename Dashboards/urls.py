@@ -2,6 +2,7 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
+  
 
         
    path('', views.dashboards, name='dashboards'),
@@ -33,8 +34,23 @@ urlpatterns = [
    path('allpost/editPost/<int:pk>/', views.editPost, name='editPost'),
 
 
-   path('allpost/deleteost/<int:pk>/', views.deleteost, name='deleteost'),
+  path('allpost/deletepost/<int:pk>/', views.deletepost, name='deletepost'),
   
+
+
+
+  #managing users section
+#for people with managers permision to add and remove users 
+  path('userMgt/allusers/', views.allusers, name='allusers'),
+
+  path('userMgt/aaddusers/', views.aaddusers, name='aaddusers'),
+
+   path('userMgt/editusers/<int:pk>', views.editusers, name='editusers'),
+
+   
+  path('userMgt/deleteUser/<int:pk>/', views.deleteUser, name='deleteUser'),
+  
+
 
 
 

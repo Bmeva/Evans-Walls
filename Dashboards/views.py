@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import CategoryForm, blogPostForm, FinalManagerblogPostForm
 from django.template.defaultfilters import slugify
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from .forms import AddUserForm, EditUserForm
 
 import random
 import string
@@ -150,8 +152,67 @@ def editPost(request, pk):
 
 
 
-#restrict editor from deleting
-def deleteost(request, pk):
+#add restrict editor from deleting function
+def deletepost(request, pk):
     theblog = get_object_or_404(blog, pk=pk)
     theblog.delete()
     return redirect('post')
+
+
+
+
+#managing users section
+#for people with manager role to add remove users
+def allusers(request):
+
+    theusers = User.objects.all()
+    context = {
+        'theusers': theusers,
+
+    }
+    return render(request, 'Dash/userMgt/allusers.html', context)
+
+
+def aaddusers(request):
+    if request.method == 'POST':
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('allusers')
+        else:
+            print(form.errors)
+    form = AddUserForm()
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'Dash/userMgt/aaddusers.html', context)
+
+
+def editusers(request, pk):
+
+    theuser = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = EditUserForm(request.POST, instance=theuser)
+        if form.is_valid():
+            form.save()
+            return redirect('allusers')
+        else:
+            print('Form is not valid')
+            print(form.errors)
+        
+    form = EditUserForm(instance = theuser)
+
+    context = {
+        'form': form,
+        'theuser': theuser,
+    }
+   
+
+    return render(request, 'Dash/userMgt/editusers.html', context)
+
+
+def deleteUser(request, pk):
+    theuser = get_object_or_404(User, pk=pk)
+    theuser.delete()
+    return redirect('allusers')
