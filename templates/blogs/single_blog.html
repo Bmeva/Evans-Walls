@@ -30,7 +30,53 @@
                 <section class="mb-5">
                     <p class="fs-5 mb-4 badge bg-warning" >{{single_theblog.short_description}}</p>
                     <p class="fs-5 mb-4 text-justify">{{single_theblog.blog_body}}</p>
+                    <!-- Print comments-->
+                    <h4> Comments: {{blog_comments.count}} | <a href=""><i class="fa fa-check text-success"></i></a></h4>
+                    {% if blog_comments %}
+                            {% for thecomment in blog_comments|slice:":4" %} <!-- Display only the first 4 comments -->
+                            <div class="card mt-2">
+                                <div class="card-body">
+                                    <p class="card-text mb-0">{{ thecomment.comment }}</p>
+                                    <span>By: {{ thecomment.theuser }}</span>
+                                    <small> | {{ thecomment.created_at | timesince }} ago</small>
+                                </div>
+                            </div>
+                            {% endfor %}
 
+                            <div id="remaining-comments" style="display: none;"> <!-- Hidden initially -->
+                                {% for thecomment in blog_comments|slice:"4:" %} <!-- Display the remaining comments -->
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <p class="card-text mb-0">{{ thecomment.comment }}</p>
+                                        <span>By: {{ thecomment.theuser }}</span>
+                                        <small> | {{ thecomment.created_at | timesince }} ago</small>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <button id="expand-comments-btn" class="btn btn-danger mt-2">Expand Comments</button>
+
+                        {% else %}
+                            <p>No comments</p>
+                        {% endif %}
+                                            <br>
+
+
+                    <div class="form-group">
+                        {% if user.is_authenticated %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea name="comment-input" class="form-control" cols="30" placeholder="Wrute your comment" rows="10"></textarea>
+                                <input type="submit" value="submit" class="btn btn-primary mt-2">
+                            </div>
+                        </form>
+                        {% else %}
+
+                        <p>Please <span><a href="{% url 'login' %}">Login</a></span> to write a comment</p>
+                        {% endif %}
+                    </div>
                    
                     </section>
             </article>
@@ -98,6 +144,17 @@
         </div>
     </div>
 </div>
+
+<!-- Import jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#expand-comments-btn').click(function() {
+            $('#remaining-comments').toggle(); // Toggle visibility of the remaining comments
+        });
+    });
+</script>
 
 {% include 'includes/footerForm.html' %}
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.http.request import HttpRequest
-from .models import Category, blog, About, SocialLink
+from .models import Category, blog, About, SocialLink, commentModel
 
 
 class BlogAdmin(admin.ModelAdmin):
@@ -9,6 +9,14 @@ class BlogAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title', 'b_category')
     search_fields = ('id', 'title', 'author', 'b_category__category_name', 'status') #b_category__category_name is a foreign key that is why we used __ to point to the particular field
     list_editable = ('is_featured','status')
+    ordering = ['id']
+
+
+
+class commentModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'theuser', 'comment', 'created_at', 'updated_at')
+    list_display_links = ('id', 'created_at')
+    list_editable = ('comment',)
     ordering = ['id']
     
 
@@ -29,3 +37,7 @@ admin.site.register(blog, BlogAdmin)
 admin.site.register(About, AboutAdmin)
 
 admin.site.register(SocialLink)
+admin.site.register(commentModel, commentModelAdmin)
+
+
+

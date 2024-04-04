@@ -63,3 +63,17 @@ class SocialLink(models.Model):
     #if you want the updated_at field to automatically update whenever the object is saved, 
     #you should use auto_now=True. auto_now_add is typically used for fields that should be set 
     #to the current date and time when the object is first created and not updated thereafter
+
+
+
+class commentModel(models.Model):
+    theuser = models.ForeignKey(User, on_delete=models.CASCADE)
+    theblog = models.ForeignKey(blog, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add= True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.comment
+
+

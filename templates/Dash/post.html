@@ -10,49 +10,49 @@
             <h2>All Categories</h2>
             <a href="{% url 'Addpost' %}" class="btn btn-dark text-light float-right mb-2">ADD POST</a>
 
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Author</th>
-                    <th>Status</th>
-                    <th>Featured</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for post in thepost %} <!--coming from context processor-->
-                  <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{ post.title }}</td>
-                    <td>{{post.b_category}}</td>
-                    <td>{{post.Author}}</td>
-                    <td>{{ post.status }}</td>
-                    <td>{% if post.is_featured %}<i class="fa fa-check text-success"></i>{% else %}<i class="fa fa-times text-danger"></i>{% endif %}</td>
-                    <!--<td>{{ post.is_featured }}</td>-->
-                    
-                    <td>
-                        <a href="{% url 'editPost' post.id %}"><i class="fa fa-edit text-success"></i></a>&nbsp;
-                       
-                        <a href="{% url 'deletepost' post.id %}" onclick="return confirmDelete();"><i class="fa fa-trash text-danger"></i></a>
-                    
-                    </td>
-                  </tr>
-                  {% endfor %}
-                 
-                </tbody>
-              </table>
             
-        
-        </div>
+            <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Author</th>
+                      <th>Status</th>
+                      <th>Featured</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for post in thepost %}
+                      <tr class="post-row" {% if forloop.counter > 5 %} style="display: none;" {% endif %}>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ post.title }}</td>
+                          <td>{{ post.b_category }}</td>
+                          <td>{{ post.Author }}</td>
+                          <td>{{ post.status }}</td>
+                          <td>{% if post.is_featured %}<i class="fa fa-check text-success"></i>{% else %}<i class="fa fa-times text-danger"></i>{% endif %}</td>
+                          <td>
+                              <a href="{% url 'editPost' post.id %}"><i class="fa fa-edit text-success"></i></a>&nbsp;
+                              <a href="{% url 'deletepost' post.id %}" onclick="return confirmDelete();"><i class="fa fa-trash text-danger"></i></a>
+                          </td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          
+          <button id="expand-posts-btn" class="btn btn-danger mt-2">Show More Posts</button>
+
+                          
+                  </div>
 
 
-</div>
+            </div>
 
+          
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  function confirmDelete() {
+  function confirmDelete() {  //this is vanilla js and i initially imlemented it without calling the jquery libary. But on second look the botth codes are excctly the same
     // Display a confirmation dialog
     var result = confirm("Are you sure you want to delete this post?");
 
@@ -64,7 +64,19 @@
       return false;
     }
   }
+
+
+
+  $(document).ready(function() {  // this is jqeurry
+      $('#expand-posts-btn').click(function() {
+          $('.post-row').toggle(); // Toggle visibility of the remaining posts
+          var buttonText = $(this).text();
+          if (buttonText.trim() === 'Show More Posts') {
+              $(this).text('Show Less Posts').removeClass('btn-primary').addClass('btn-danger');
+          } else {
+              $(this).text('Show More Posts').removeClass('btn-danger').addClass('btn-primary');
+          }
+      });
+  });
 </script>
-
-
 {% endblock%}

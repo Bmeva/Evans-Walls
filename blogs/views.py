@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import blog, Category, About
+from .models import blog, Category, About, commentModel
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -28,13 +29,26 @@ def post_by_category(request, category_id):
 
 
 def single_blog(request, id):
-
     single_theblog = get_object_or_404(blog, pk=id, status = 'Published') 
+    if request.method == 'POST':  # to save the comments
+        blog_comments = commentModel()
+        blog_comments. theuser = request.user
+        blog_comments.theblog = single_theblog
+        blog_comments.comment = request.POST['comment-input']
+        blog_comments.save()
+        return HttpResponseRedirect(request.path_info) #this HttpResponseRedirect redirects you back to the path you are so after saving the comments we want to redirect back to the particular blog
+
+
+    #comments
+    blog_comments = commentModel.objects.filter(theblog = single_theblog) #load comments when single blog post is opnened
+
     data = {
         'single_theblog': single_theblog,
+        'blog_comments': blog_comments,
     }
 
     return render(request, 'blogs/single_blog.html', data)
+    
 
 
 
@@ -96,3 +110,5 @@ def about(request):
 
 
     return render(request, 'blogs/about.html', data)
+
+
