@@ -77,3 +77,13 @@ dashcategories.html
 
 
 git log would show your previous commits
+
+DEPLOYMENT ON PYTHON ANAYWHERE
+GO to https://www.pythonanywhere.com/ and create account 
+go to pricing and signup and click create beginer account
+USername: Bevanse Email: evansboma@gmail.com Nedva@54123 and confirm your email
+
+run pip freeze > requirements.txt to get latest version of your requirements.txt
+
+remove db.sqlite3 from git ignore and media as well
+ 
