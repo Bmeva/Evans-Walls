@@ -86,4 +86,9 @@ USername: Bevanse Email: evansboma@gmail.com Nedva@54123 and confirm your email
 run pip freeze > requirements.txt to get latest version of your requirements.txt
 
 remove db.sqlite3 from git ignore and media as well
- 
+run git add - a
+git commit - m 'deployment'
+and git push origin master
+go to github to confirm if everything is uploaded
+
+you can find python anywhere documentation from https://help.pythonanywhere.com/pages/DeployExistingDjangoProject
