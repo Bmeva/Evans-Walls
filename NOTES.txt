@@ -169,7 +169,7 @@ then click save and refresh
 
 if your static files dont show change debug = True
 
-HOW TO INSTALL CRISPY FORMS
+ THIS IS HOW TO INSTALL CRISPY FORMS
 Install pip install django-crispy-forms
 go to your settings.py and add 'crispy_forms', to the installed app section
 add CRISPY_TEMPLATE_PACK = 'bootstrap4' at the bottom of your settings.py
