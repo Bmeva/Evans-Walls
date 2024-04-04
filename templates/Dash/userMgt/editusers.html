@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 <div class="row"> 
 
@@ -10,12 +11,12 @@
         {% if perms.auth.add_user %}
         <h2>Edit User</h2>
 
-       <form action="{% url 'editusers' theuser.id %}" method="POST"> <!-- added multipart/form-data bcos we would be uploading image-->
+       <form action="{% url 'editusers' theuser.id %}" method="POST" style="width: 500px; margin: left;"> <!-- added multipart/form-data bcos we would be uploading image-->
 
         
         {% csrf_token %}
 
-        {{ form }}
+        {{ form | crispy }}
 
         <button type="submit" class="btn btn-warning btn-sg">Submit</button>
        </form>

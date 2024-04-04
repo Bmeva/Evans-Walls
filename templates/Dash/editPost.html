@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 <div class="row"> 
 
@@ -9,12 +10,12 @@
     <div class="col-md-9">
         <h2>Edit Blog Post</h2>
 
-       <form action="{% url 'editPost' post.id %}" method="POST" enctype="multipart/form-data"> <!-- added multipart/form-data bcos we would be uploading image-->
+       <form action="{% url 'editPost' post.id %}" method="POST" enctype="multipart/form-data" style="width: 500px; margin: left;"> <!-- added multipart/form-data bcos we would be uploading image-->
 
         
         {% csrf_token %}
 
-        {{ form }}
+        {{ form | crispy }}
 
         <button type="submit" class="btn btn-warning btn-sg">Submit</button>
        </form>

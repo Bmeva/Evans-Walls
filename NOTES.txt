@@ -92,3 +92,90 @@ and git push origin master
 go to github to confirm if everything is uploaded
 
 you can find python anywhere documentation from https://help.pythonanywhere.com/pages/DeployExistingDjangoProject
+go to dashboard in your pythonanywhere interface and click on bash
+type pwd and it would show you where you are on the serrver
+pwd
+1. clone your repository by tyoing git clone and your repository link.
+on github you would see your repo link if you open your repo, click on code and in the https tab
+you would see the repo link so do 
+git clone https://github.com/Bmeva/Evans-Walls.git  on the python anywhere bash and press enter
+if you want to be sure if it is cloned type ls and you would see the name of the repo
+
+create a virtual environment with this code 
+mkvirtualenv --python=/usr/bin/python3.10 mysite-virtualenv but you can change the 
+mysite-virtualenv to anyname
+
+type ls and cd into your application folder
+so ls
+then cd Evans_Walls/ and enter
+then ls again to check again if your requirements.txt is there
+so once you cd into your project folder you can install requirements.txt
+next install pip install -r requirements.txt if you have requirements.txt but if you dont then you have
+to install pip install django
+
+NEXT SETUP WEB APP AND WSGI FILE
+
+Open the hamburger menu in the console and open the web tab menu in a new tab by right clicking and choosing new tab
+. Leave the console open so you can run more commands
+
+click on add a new web app and click next then click manual configuration
+then click python 3.10 becouse that is the version we are using(if you check your bash terminal you would see it )
+then click next and wait till it finished
+
+go to your bassh terminal and type pwd to see the path of your code and copy /home/Bevanse/Evans-Walls
+
+go back to where you created the new web app and insde the source code text area paste it and 
+click the checkmark
+
+next specify virtualenv name. Go to your bash terminal and you would see the name of your virtualenv
+copy it mysite-virtualenv and paste insde the virtualenv text box area and click the checkmark
+
+Next scroll down to configure static files
+and enter /static/ which is the static url we configured in the settings.py file
+
+next in the path enter /home/Bevanse/Evans-Walls/static this is your root folder and then i added static
+
+next you need to collect static
+go back to your bash terminal and ensure it is in the virtualenv path then type
+python manage.py collectstatic
+then go back to your web app configuration page and reload Bevanse.pythonanywhere.com
+
+above you would see Bevanse.pythonanywhere.com open it in a new tab which automatically takes
+you to the default web page
+
+go back to your app configuration page and in the  WSGI configuration file right click on the link to 
+open it in another page. delete everything in the page.
+go back to the documentation and under edit your wsgi file section copy all the code and paste it
+insdie the previous wsgi file you deleted its contents
+
+then in the page you would see where its written path = '/home/myusername/mysite' change that to
+path = '/home/Bevanse/Evans-Walls'
+Bevanse is the username and Evans_Walls is the name of the project.
+you would find it in the bash terminal att the point we typed pwd
+
+
+next go to os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings' and change mysite to Evans_Walls
+
+so it would be os.environ['DJANGO_SETTINGS_MODULE'] = 'Evans_Walls.settings' then click save and click
+refresh which is close to the save tab
+
+go back to your app configuration tab and click on files which you can open in a new tab
+click on Evans_Walls click on Evans_Walls again then click on settings.py and go to the allowed_host section
+add Bevanse.pythonanywhere.com which is the domain and you can find it in the app creation section
+then change debug = False 
+go to the Templates section and change it to Evans-Walls/templates
+
+then click save and refresh
+
+if your static files dont show change debug = True
+
+HOW TO INSTALL CRISPY FORMS
+Install pip install django-crispy-forms
+go to your settings.py and add 'crispy_forms', to the installed app section
+add CRISPY_TEMPLATE_PACK = 'bootstrap4' at the bottom of your settings.py
+then run this command pip install crispy-bootstrap4  
+then add this in the installed app  'crispy_bootstrap4',
+
+load {% load crispy_forms_tags %} on each page you have a forms
+then add  {{ form | crispy }} | crispy to each form tage
+save changes, run server

@@ -1,7 +1,9 @@
+
+
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% load crispy_forms_tags %}
 <div class="row"> 
 
     {% include 'Dash/dashsidebar.html' %}
@@ -9,12 +11,12 @@
     <div class="col-md-9">
         <h2>Add new Category</h2>
 
-       <form action="{% url 'addcategory' %}" method="POST">
+       <form action="{% url 'addcategory' %}" method="POST" style="width: 500px; margin: left;">
 
         
         {% csrf_token %}
 
-        {{ form }}
+        {{ form | crispy }}
 
         <button type="submit" class="btn btn-warning btn-sg">Submit</button>
        </form>
@@ -25,6 +27,8 @@
 
 
 </div>
+
+
 
 
 {% endblock %}

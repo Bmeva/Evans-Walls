@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 <div class="row"> 
 
@@ -9,12 +10,12 @@
     <div class="col-md-9">
         <h2>Edit Category</h2>
 
-       <form action="{% url 'editcategory' catego.id %}" method="POST">
+       <form action="{% url 'editcategory' catego.id %}" method="POST" style="width: 500px; margin: left;">
 
         
         {% csrf_token %}
 
-        {{ form }}
+        {{ form | crispy }}
 
         <button type="submit" class="btn btn-warning btn-sg">Submit</button> &nbsp;
 
@@ -23,11 +24,14 @@
       
                     
        <br>
-       <form action="{% url 'deletecategory' catego.id %}" method="POST">
+       <div class="row"> 
+       <form action="{% url 'deletecategory' catego.id %}" method="POST" style="width: 500px; margin: left;">
         {% csrf_token %}
         <input type="hidden" name="pk" value="{{ catego.id }}">
-        <button type="submit" class="btn btn-danger btn-lg">Delete Category</button>
+        <button type="submit" onclick="return confirmDelete();" class="btn btn-danger btn-lg">Delete Category</button>
+       
         </form>
+        </div>
         
     
     </div>
@@ -36,6 +40,19 @@
 
 
 </div>
-
+<script>
+    function confirmDelete() {
+      // Display a confirmation dialog
+      var result = confirm("Are you sure you want to delete this post?");
+  
+      // If the user confirms, proceed with deletion
+      if (result) {
+        return true;
+      } else {
+        // If the user cancels, prevent the default action (deleting the post)
+        return false;
+      }
+    }
+  </script>
 
 {% endblock %}
