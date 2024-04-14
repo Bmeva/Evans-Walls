@@ -25,6 +25,9 @@ urlpatterns = [
 
     path('', views.home, name = 'home'),
 
+     path('', views.home, name = 'home'),
+
+  
     path('category/',include('blogs.urls')),
 
     path('auth/', include('authentication.urls')), # with this would be auth/ the name of the url inside authentication.urls
@@ -32,5 +35,7 @@ urlpatterns = [
     #path('', include('authentication.urls')), if i leave this path empty then it would go to authentication.urls and find the urls
 
      path('CMS/dashboard/', include('Dashboards.urls')),
+
+    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,6 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+from django.utils.safestring import mark_safe
+from ckeditor.widgets import CKEditorWidget
+
+
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -12,16 +16,18 @@ class CategoryForm(forms.ModelForm):
 
 
 
-
-
 class blogPostForm(forms.ModelForm):
+  
+
     class Meta:
         model = blog
         fields = ('title', 'b_category', 'featured_image', 'short_description',
                    'blog_body', 'status', 'is_featured', ) #limiting the fields that the editor can add
+        widgets = {
+            'blog_body': CKEditorWidget(),
+        }
 
-
-
+      
 
 #this form renders everything in the blog model
 class FinalManagerblogPostForm(forms.ModelForm):

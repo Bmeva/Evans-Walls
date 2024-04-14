@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'Dashboards',
     'crispy_forms',
     'crispy_bootstrap4',
+    'ckeditor',
+  
+  
 
   
 ]
@@ -151,8 +154,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
 
 
 

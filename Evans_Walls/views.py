@@ -21,3 +21,4 @@ def home(request):
     
         
     #return HttpResponse('<h2>Home page</h2>')
+

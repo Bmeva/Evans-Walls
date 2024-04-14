@@ -179,3 +179,21 @@ then add this in the installed app  'crispy_bootstrap4',
 load {% load crispy_forms_tags %} on each page you have a forms
 then add  {{ form | crispy }} | crispy to each form tage
 save changes, run server
+
+
+
+install django-ckeditor
+add   'ckeditor', to settings installed apps
+add from ckeditor.fields import RichTextField  iin your models
+
+add this to your form
+
+ widgets = {
+            'blog_body': CKEditorWidget(),
+        }
+
+import from ckeditor.widgets import CKEditorWidget in your forms
+
+load {{ form.media}} at the top of everypage where you want the editor to work
+
+dont forget to make migrations when you install it

@@ -28,8 +28,9 @@
                 {% endif %}
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4 badge bg-warning" >{{single_theblog.short_description}}</p>
-                    <p class="fs-5 mb-4 text-justify">{{single_theblog.blog_body}}</p>
+                    <p class="fs-5 mb-4 badge bg-warning" >{{single_theblog.short_description | truncatewords:10 }}</p>
+                    <p class="fs-5 mb-4 text-justify">{{single_theblog.blog_body | safe}}</p>
+                   
                     <!-- Print comments-->
                     <h4> Comments: {{blog_comments.count}} | <a href=""><i class="fa fa-check text-success"></i></a></h4>
                     {% if blog_comments %}
