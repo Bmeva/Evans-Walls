@@ -101,6 +101,8 @@ you would see the repo link so do
 git clone https://github.com/Bmeva/Evans-Walls.git  on the python anywhere bash and press enter
 if you want to be sure if it is cloned type ls and you would see the name of the repo
 
+
+
 create a virtual environment with this code 
 mkvirtualenv --python=/usr/bin/python3.10 mysite-virtualenv but you can change the 
 mysite-virtualenv to anyname
@@ -168,6 +170,13 @@ go to the Templates section and change it to Evans-Walls/templates
 then click save and refresh
 
 if your static files dont show change debug = True
+
+
+to go back home type cd /home  this is to go back but to go forward you type cd Bevanse/
+
+i did git init 
+git remote add origin https://github.com/Bmeva/Evans-Walls.git
+then git pull origin master to make it work
 
  THIS IS HOW TO INSTALL CRISPY FORMS
 Install pip install django-crispy-forms
