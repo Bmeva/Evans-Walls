@@ -218,3 +218,5 @@ import from ckeditor.widgets import CKEditorWidget in your forms
 load {{ form.media}} at the top of everypage where you want the editor to work
 
 dont forget to make migrations when you install it
+
+I need to take off notes

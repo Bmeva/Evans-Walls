@@ -7,7 +7,7 @@
 *.pyc
 __pycache__/
 local_settings.py
-
+NOTES.txt
 db.sqlite3-journal
 
 
