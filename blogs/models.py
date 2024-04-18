@@ -31,6 +31,7 @@ class blog(models.Model):
     featured_image = models.ImageField(upload_to='uploads/%Y/%m/%d', blank=True)
     short_description = models.TextField(max_length = 500)
     blog_body = RichTextField(blank=True, null=True)
+    video = models.FileField(upload_to='videos/%Y/%m/%d', blank=True, null=True)
     #blog_body = models.TextField(max_length=4000)
     status = models.CharField(max_length = 20, choices = STATUS_CHOICES, default='Draft')
     is_featured = models.BooleanField(default = False)

@@ -109,16 +109,19 @@ mysite-virtualenv to anyname
 
 type ls and cd into your application folder
 so ls
-then cd Evans_Walls/ and enter
+then cd Evans-Walls/ and enter
 then ls again to check again if your requirements.txt is there
 so once you cd into your project folder you can install requirements.txt
+if you cant cd into the project folder open files on the same page the bash terminal is Open
+thereby closing the bash. then open the bash terminal again and you would see it has navigated into
+the project folder
 next install pip install -r requirements.txt if you have requirements.txt but if you dont then you have
 to install pip install django
 
 NEXT SETUP WEB APP AND WSGI FILE
 
-Open the hamburger menu in the console and open the web tab menu in a new tab by right clicking and choosing new tab
-. Leave the console open so you can run more commands
+Open the hamburger menu in the console and open the web tab menu in a new tab by right clicking and
+ choosing new tab. Leave the console open so you can run more commands
 
 click on add a new web app and click next then click manual configuration
 then click python 3.10 becouse that is the version we are using(if you check your bash terminal you would see it )
@@ -131,11 +134,15 @@ click the checkmark
 
 next specify virtualenv name. Go to your bash terminal and you would see the name of your virtualenv
 copy it mysite-virtualenv and paste insde the virtualenv text box area and click the checkmark
+if you dont see it open files and click on virtualenv then you would see the full name
 
 Next scroll down to configure static files
 and enter /static/ which is the static url we configured in the settings.py file
 
-next in the path enter /home/Bevanse/Evans-Walls/static this is your root folder and then i added static
+next in the path enter /home/Bevanse/Evans-Walls/static this is your root folder and then i added 
+static
+when i uploaded on juliets ecomerce the path was 
+/home/julieeva/AdvancedEstore/static
 
 next you need to collect static
 go back to your bash terminal and ensure it is in the virtualenv path then type
@@ -147,16 +154,21 @@ you to the default web page
 
 go back to your app configuration page and in the  WSGI configuration file right click on the link to 
 open it in another page. delete everything in the page.
+
+
 go back to the documentation and under edit your wsgi file section copy all the code and paste it
 insdie the previous wsgi file you deleted its contents
 
 then in the page you would see where its written path = '/home/myusername/mysite' change that to
 path = '/home/Bevanse/Evans-Walls'
+for juliet ecomerce i changed it to /home/julieeva/AdvancedEstore/
+
 Bevanse is the username and Evans_Walls is the name of the project.
 you would find it in the bash terminal att the point we typed pwd
 
 
 next go to os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings' and change mysite to Evans_Walls
+Evans_Walls is the project root folder where your settings.py file is
 
 so it would be os.environ['DJANGO_SETTINGS_MODULE'] = 'Evans_Walls.settings' then click save and click
 refresh which is close to the save tab

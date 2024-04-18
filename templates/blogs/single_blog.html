@@ -30,6 +30,16 @@
                 <section class="mb-5">
                     <p class="fs-5 mb-4 badge bg-warning" >{{single_theblog.short_description | truncatewords:10 }}</p>
                     <p class="fs-5 mb-4 text-justify">{{single_theblog.blog_body | safe}}</p>
+                    
+                    {% if single_theblog.video %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video class="embed-responsive-item" controls>
+                            <source src="{{ single_theblog.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    {% endif %}
+                    
                    
                     <!-- Print comments-->
                     <h4> Comments: {{blog_comments.count}} | <a href=""><i class="fa fa-check text-success"></i></a></h4>
